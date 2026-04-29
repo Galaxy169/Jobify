@@ -58,6 +58,8 @@ job-tracker/
 ├── README.md
 ```
 
+- Read this: https://github.com/Galaxy169/Jobify/blob/main/docs/jobify-folder-structure.md
+
 ---
 
 ## Team Members (Team 54)

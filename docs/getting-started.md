@@ -1,8 +1,10 @@
 # Getting Started
 
 - **MAKE SURE YOUR NODE VERSION IS 22.22.2 (LTS) or above.**
-- https://nodejs.org/en/download
-- Read Them:
+- Download Node: https://nodejs.org/en/download
+- Read these guides as well:-
+- https://github.com/Galaxy169/Jobify/blob/main/docs/jobify-folder-structure.md
+- https://github.com/Galaxy169/Jobify/blob/main/docs/git-team-setup.md
 
 ## 1. Clone Repo (Skip if already done)
 
