@@ -19,7 +19,7 @@ app.use(express.json());
 
 // Health check
 app.get("/", (req, res) => {
-  res.send("🚀 Jobify API running");
+  res.send("Jobify API running");
 });
 
 // Routes

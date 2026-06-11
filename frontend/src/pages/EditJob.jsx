@@ -10,22 +10,26 @@ export default function EditJob() {
   const [form, setForm] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    api
-      .get("/jobs")
-      .then((res) => {
-        const job = res.data.data.find((j) => j.id == id);
-        setForm(job);
-      })
-      .catch((err) => {
-        console.error(err);
-        toast.error("Failed to load job");
-      })
-      .finally(() => setLoading(false));
-  }, [id]);
+useEffect(() => {
+  const fetchJob = async () => {
+    try {
+      const res = await api.get("/jobs");
 
-  if (loading) return <p className="text-center mt-10">Loading...</p>;
-  if (!form) return <p className="text-center mt-10">Job not found</p>;
+      const job = res.data.data.find((j) => j.id == id);
+
+      setForm(job);
+    } catch (err) {
+      console.error(err);
+      toast.error("Failed to load job");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchJob();
+}, [id]);
+
+ 
 
   const handleSubmit = async () => {
     const loadingToast = toast.loading("Updating job...");
@@ -40,6 +44,9 @@ export default function EditJob() {
       toast.error("Update failed");
     }
   };
+
+   if (loading) return <p className="text-center mt-10">Loading...</p>;
+   if (!form) return <p className="text-center mt-10">Job not found</p>;
 
   return (
     <div className="section">

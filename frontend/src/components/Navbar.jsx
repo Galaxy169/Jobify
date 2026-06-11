@@ -14,7 +14,7 @@ export default function Navbar() {
       : "text-gray-600 hover:text-indigo-600";
 
   return (
-    <nav className="bg-white border-b sticky top-0 z-50">
+    <nav className="bg-slate-50 border-b border-emerald-800 shadow-md shadow-indigo-200 sticky top-0 z-50">
       {/* TOP BAR */}
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
         {/* LOGO */}
@@ -208,6 +208,7 @@ export default function Navbar() {
           )}
         </div>
       )}
+      <div className="h-0.5 w-full bg-gradient-to-r from-indigo-500 via-violet-500 to-pink-500"></div>
     </nav>
   );
 }

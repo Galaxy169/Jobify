@@ -19,6 +19,13 @@ export const AuthProvider = ({ children }) => {
     setUser(data.user);
   };
 
+  // we are updating our user after the payment is successfull so our front will fetch the updated state from our backend
+  // without this user have to login again to see the effects
+  const updateUser = (updatedUser) => {
+    localStorage.setItem("user", JSON.stringify(updatedUser));
+    setUser(updatedUser);
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -44,7 +51,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, loading }}>
+    <AuthContext.Provider value={{ user, login, logout, loading, updateUser }}>
       {children}
     </AuthContext.Provider>
   );

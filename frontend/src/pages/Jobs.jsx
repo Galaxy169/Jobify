@@ -40,15 +40,12 @@ export default function Jobs() {
 
   if (!jobs.length) {
     return (
-      <div className="text-center mt-20">
-        <h2 className="text-xl font-semibold">No jobs yet 🚀</h2>
-        <p className="text-gray-500">Start by adding your first job</p>
-        <Link
-          to="/add-job"
-          className="bg-indigo-600 text-white px-4 py-2 m-10 rounded"
-        >
-          + Add Job
-        </Link>
+      <div className="text-center mt-20 flex flex-col justify-center items-center transition-all duration-300 animate-[pulse_1s_ease-in_1]">
+        <h2 className="text-xl font-semibold">No jobs yet</h2>
+        <p className="text-gray-500 m-6">Start by adding your first job</p>
+        <div className="bg-gradient-to-r from-indigo-400 to-sky-600 text-white px-5 py-3 rounded-lg shadow-lg hover:scale-[1.02] hover:shadow-indigo-300 transition-all duration-300 cursor-pointer">
+          <Link to="/add-job">+ Add Job</Link>
+        </div>
       </div>
     );
   }
@@ -68,16 +65,21 @@ export default function Jobs() {
 
       {jobs.length === 0 && <p>No jobs yet</p>}
 
-      <div className="space-y-4 rounded-3xl cursor-pointer hover:scale-101 transition-all duration-300">
+      <div className="space-y-4">
         {jobs.map((job) => (
-          <div key={job.id} className="card flex justify-between items-center">
+          <div
+            key={job.id}
+            className="bg-white border border-gray-100 rounded-3xl p-5 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5"
+          >
+            {/* LEFT */}
             <div>
-              <h3 className="font-semibold text-lg">{job.company}</h3>
-              <p className="text-gray-600 text-sm">{job.role}</p>
+              <div className="flex items-center gap-3">
+                <h3 className="text-lg font-bold text-gray-900">
+                  {job.company}
+                </h3>
 
-              <div className="mt-2">
                 <span
-                  className={`px-2 py-1 text-xs rounded ${
+                  className={`px-3 py-1 text-xs rounded-full font-medium ${
                     job.status === "applied"
                       ? "bg-blue-100 text-blue-700"
                       : job.status === "interviewing"
@@ -92,18 +94,22 @@ export default function Jobs() {
                   {job.status}
                 </span>
               </div>
+
+              <p className="text-sm text-gray-500 mt-1">{job.role}</p>
             </div>
 
-            <div className="space-x-3">
+            {/* ACTIONS */}
+            <div className="flex items-center gap-3">
               <Link
                 to={`/edit-job/${job.id}`}
-                className="text-slate-50 text-mb bg-indigo-600 pl-5 pr-5 pt-2 pb-2 rounded-2xl hover:bg-indigo-700 transition-all duration-200"
+                className="px-5 py-2 rounded-xl bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 transition-all duration-300"
               >
                 Edit
               </Link>
+
               <button
                 onClick={() => handleDelete(job.id)}
-                className="text-slate-50 text-mb cursor-pointer bg-red-500 pl-5 pr-5 pt-2 pb-2 rounded-2xl hover:bg-red-700 transition-all duration-200"
+                className="px-5 py-2 rounded-xl bg-red-500 text-white text-sm font-medium hover:bg-red-600 transition-all duration-300 cursor-pointer"
               >
                 Delete
               </button>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
+import toast from "react-hot-toast";
 // import PageWrapper from "../components/PageWrapper";
 // import Skeleton from "../components/Skeleton";
 
@@ -8,27 +9,23 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    api
-      .get("/jobs")
-      .then((res) => {
+    const fetchJob = async () => {
+      try {
+        const res = await api.get("/jobs");
+
         setJobs(res.data.data);
-      })
-      .catch((err) => {
+      } catch (err) {
         console.error(err);
-      })
-      .finally(() => setLoading(false));
+        toast.error("Failed to fetch job");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchJob();
   }, []);
 
-//   if (loading) {
-//     return (
-//       <div className="section space-y-4">
-//         <Skeleton />
-//         <Skeleton />
-//       </div>
-//     );
-//   }
-
-  // 📊 Metrics
+  // Metrics
   const total = jobs.length;
   const applied = jobs.filter((j) => j.status === "applied").length;
   const interview = jobs.filter((j) => j.status === "interviewing").length;
@@ -36,43 +33,41 @@ export default function Dashboard() {
   const rejected = jobs.filter((j) => j.status === "rejected").length;
 
   return (
+    <div className="section animate-[pulse_1s_ease-in_1]">
+      <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
 
-      <div className="section">
-        <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
+      {/* Metrics */}
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8 ">
+        <Metric title="Total Jobs" value={total} />
+        <Metric title="Applied" value={applied} color="blue" />
+        <Metric title="Interview" value={interview} color="yellow" />
+        <Metric title="Offers" value={offer} color="green" />
+        <Metric title="Rejected" value={rejected} color="red" />
+      </div>
 
-        {/* 🧮 Metrics */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
-          <Metric title="Total Jobs" value={total} />
-          <Metric title="Applied" value={applied} color="blue" />
-          <Metric title="Interview" value={interview} color="yellow" />
-          <Metric title="Offers" value={offer} color="green" />
-          <Metric title="Rejected" value={rejected} color="red" />
-        </div>
+      {/* 📋 Recent Jobs */}
+      <div>
+        <h2 className="text-lg font-semibold mb-3">Recent Jobs</h2>
 
-        {/* 📋 Recent Jobs */}
-        <div>
-          <h2 className="text-lg font-semibold mb-3">Recent Jobs</h2>
+        {jobs.length === 0 && <p className="text-gray-500">No jobs yet</p>}
 
-          {jobs.length === 0 && <p className="text-gray-500">No jobs yet</p>}
-
-          <div className="space-y-3">
-            {jobs.slice(0, 5).map((job) => (
-              <div
-                key={job.id}
-                className="card flex justify-between items-center"
-              >
-                <div>
-                  <p className="font-medium">{job.company}</p>
-                  <p className="text-sm text-gray-500">{job.role}</p>
-                </div>
-
-                <StatusBadge status={job.status} />
+        <div className="space-y-3">
+          {jobs.slice(0, 5).map((job) => (
+            <div
+              key={job.id}
+              className="card flex justify-between items-center "
+            >
+              <div>
+                <p className="font-medium">{job.company}</p>
+                <p className="text-sm text-gray-500">{job.role}</p>
               </div>
-            ))}
-          </div>
+
+              <StatusBadge status={job.status} />
+            </div>
+          ))}
         </div>
       </div>
-  
+    </div>
   );
 }
 
@@ -86,7 +81,7 @@ function Metric({ title, value, color = "gray" }) {
   };
 
   return (
-    <div className="card text-center hover:shadow-md hover:scale-105 duration-200 cursor-pointer transition">
+    <div className="card text-center hover:shadow-slate-200 hover:scale-105 duration-200 cursor-pointer transition ">
       <p className="text-sm text-gray-500">{title}</p>
       <h2 className={`text-2xl font-bold mt-1 ${colors[color]}`}>{value}</h2>
     </div>

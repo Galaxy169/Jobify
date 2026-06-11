@@ -42,11 +42,15 @@ export default function Register() {
 
       const res = await api.post("/auth/register", form);
 
-      console.log("REGISTER RESPONSE:", res.data); // DEBUG
+      // console.log("REGISTER RESPONSE:", res.data); // DEBUG
 
       toast.dismiss(loadingToast);
       toast.success("Account created!");
-      navigate("/login");
+      navigate("/login", {
+        state: {
+          justRegistered: true,
+        }
+      });
     } catch (err) {
       console.error(err);
       toast.dismiss(loadingToast);

@@ -52,7 +52,7 @@ export default function AddJob() {
       await api.post("/jobs", form);
 
       toast.dismiss(t);
-      toast.success("Job added 🎉");
+      toast.success("Job added");
 
       navigate("/jobs");
     } catch (err) {
