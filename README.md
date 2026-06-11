@@ -2,9 +2,17 @@
 
 A full-stack web application that helps users manage their job search process in one place. Users can track applications, build resumes, explore interview experiences shared by others, and access premium content through a subscription model.
 
+## Screenshot
+
+![alt text](image.png)
+![alt text](image-1.png)
+![alt text](image-2.png)
+![alt text](image-3.png)
+![alt text](image-4.png)
+
 ---
 
-## Features (Planned)
+## Features
 
 ### Job Tracking
 
@@ -59,14 +67,5 @@ job-tracker/
 ```
 
 - Read this: https://github.com/Galaxy169/Jobify/blob/main/docs/jobify-folder-structure.md
-
----
-
-## Team Members (Team 54)
-
-- Aadil Ansari
-- Ankita Yadav
-- Abhijeet Chavan
-- Radha Mali
 
 ---

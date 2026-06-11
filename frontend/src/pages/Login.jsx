@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import api from "../services/api";
 import { AuthContext } from "../context/AuthContext";
 import toast from "react-hot-toast";
@@ -10,6 +10,8 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
 
   const { login } = useContext(AuthContext);
+
+  const location = useLocation();
   const navigate = useNavigate();
 
   const validate = () => {
@@ -25,11 +27,10 @@ export default function Login() {
   };
 
   const handleSubmit = async () => {
-
-      if (!validate()) {
-        toast.error("Fix form errors");
-        return;
-      }
+    if (!validate()) {
+      toast.error("Fix form errors");
+      return;
+    }
 
     const loadingToast = toast.loading("Logging in...");
     try {
@@ -37,14 +38,21 @@ export default function Login() {
 
       const res = await api.post("/auth/login", form);
 
-      console.log("LOGIN RESPONSE:", res.data); // DEBUG
+      // console.log("LOGIN RESPONSE:", res.data); // DEBUG
 
       const { token, user } = res.data.data;
 
       login({ token, user });
 
-      toast.dismiss(loadingToast);
-      toast.success("Welcome back!");
+      if (location.state?.justRegistered) {
+        toast.dismiss(loadingToast);
+        toast.success("Account created successfully!");
+      } else {
+        toast.dismiss(loadingToast);
+        toast.success(`Welcome back, ${res.data.data.user.name}`);
+      }
+
+      // toast.success("Welcome back!");
 
       navigate("/dashboard");
     } catch (err) {
@@ -85,7 +93,7 @@ export default function Login() {
         </button>
 
         <p className="mt-3 text-sm">
-          Don't have an account? {" "}
+          Don't have an account?{" "}
           <Link to="/register" className="text-indigo-600">
             Register
           </Link>

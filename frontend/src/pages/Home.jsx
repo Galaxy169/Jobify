@@ -60,11 +60,12 @@ export default function Home() {
     );
   }
 
-  // 🔐 LOGGED IN
+  // LOGGED IN
   return (
     <div className="min-h-screen bg-gradient-to-b from-indigo-50 to-white flex items-center justify-center">
+      
       <div className="text-center max-w-xl">
-        <h1 className="text-4xl font-bold mb-3">
+        <h1 className="text-4xl font-bold mb-3 animate-pulse">
           Welcome back, <span className="text-indigo-600">{user.name}</span>
         </h1>
 
@@ -75,14 +76,14 @@ export default function Home() {
         <div className="flex justify-center gap-4">
           <Link
             to="/dashboard"
-            className="bg-indigo-600 text-white px-5 py-3 rounded-lg hover:bg-indigo-700 transition"
+            className="bg-gradient-to-r from-sky-400 to-indigo-600 text-white px-5 py-3 rounded-lg shadow-lg hover:scale-[1.02] hover:shadow-indigo-300 transition-all duration-300 cursor-pointer"
           >
             Dashboard
           </Link>
 
           <Link
             to="/jobs"
-            className="border px-5 py-3 rounded-lg hover:bg-gray-100 transition"
+            className="border px-5 py-3 rounded-lg hover:bg-gray-100 shadow-lg hover:scale-[1.02] hover:shadow-slate-300 transition-all duration-300 cursor-pointer"
           >
             My Jobs
           </Link>
@@ -92,7 +93,7 @@ export default function Home() {
   );
 }
 
-// 🔹 Feature Card Component
+// Feature Card Component
 function Feature({ title, desc }) {
   return (
     <div className="bg-white p-6 rounded-xl shadow-sm border hover:shadow-md transition">

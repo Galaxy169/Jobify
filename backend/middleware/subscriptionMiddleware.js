@@ -1,9 +1,12 @@
 export const subscriptionMiddleware = (req, res, next) => {
-  // If no user → treat as free user
+  // If no user treat as free user
   if (!req.user) {
     req.subscription_type = "free";
     return next();
   }
+
+  // console.log(req.subscription_type);
+  // console.log(req.user.subscription_type);
 
   req.subscription_type = req.user.subscription_type;
   next();

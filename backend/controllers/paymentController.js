@@ -48,7 +48,7 @@ export const verifyPayment = async (req, res) => {
 
     await markAsPaid(razorpay_order_id, razorpay_payment_id);
 
-    res.json({ message: "Payment verified → Premium activated" });
+    res.json({ message: "Payment verified Premium activated" });
   } catch (err) {
     console.error("Verify error:", err);
     res.status(500).json({ message: "Server error" });

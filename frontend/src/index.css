@@ -1,4 +1,10 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 @import "tailwindcss";
+
+body {
+  font-family: "Roboto", sans-serif;
+}
 
 /* Reusable UI classes */
 
@@ -30,10 +36,8 @@
   @apply text-red-500 text-xs mt-1 pb-3;
 }
 
-/* Add this to your global CSS file (e.g. index.css or globals.css)
-   inside the @layer components block.
+/*  inside the @layer components block.
    This defines the shared input style used across all form fields. */
-
 @layer components {
   .input-field {
     @apply w-full px-3 py-2 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg

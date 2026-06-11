@@ -15,10 +15,9 @@ import Community from "./pages/Community";
 import Resume from "./pages/Resume";
 import Upgrade from "./pages/Upgrade";
 import Profile from "./pages/Profile";
+import PaymentSuccess from "./components/PaymentSuccess";
 
-// Hide navbar on auth pages
 function Layout() {
-
 
   return (
     <>
@@ -93,6 +92,15 @@ function Layout() {
           element={
             <ProtectedRoute>
               <Upgrade />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/payment-success"
+          element={
+            <ProtectedRoute>
+              <PaymentSuccess />
             </ProtectedRoute>
           }
         />
